@@ -1,0 +1,53 @@
+{
+    "elements": [	
+        {  
+            "type":  "ValidationTextBox"
+            ,"name":  "Postcode"
+            ,"caption":  "Postcode:"
+        }
+        ,{  
+            "type":  "ValidationTextBox"
+            ,"name":  "huisnr"
+            ,"caption":  "Huisnr"
+        }
+        ,{  
+            "type":  "ValidationTextBox"
+            ,"name":  "bagid"
+            ,"caption":  "Bag id van de locatie. "
+            ,"enabled": false
+        }
+        ,{  
+            "type":  "ValidationTextBox"
+            ,"name":  "bagDescription"
+            ,"caption":  "Bag omschrijving van de locatie. "
+            ,"enabled": false
+        }
+        ,{  
+            "type":  "CheckBox"
+            ,"name":  "pushMelding"
+            ,"caption":  "Wil je een dag van te voren een pushmelding ontvangen?"
+            ,"onChange": "echo hvc_toggleShowFormField($id, 'WebFrontId', $pushMelding);"
+        }
+        ,{ 
+            "type": "SelectInstance"
+            ,"name": "WebFrontId"
+            ,"caption": "Pusmelding naar:" 
+            ,"visible": true
+        }
+
+
+    ],
+    "actions": [
+            { 
+                "type": "Button"
+                ,"label": "Haal BagId op"
+                ,"onClick": "echo hvc_getBagId($id);" 
+            }
+            ,{ 
+                "type": "Button"
+                ,"label": "Haal afvalstromen op en maak variabel aan"
+                ,"onClick": "echo hvc_getAfvalstromen($id);" 
+            }
+        ],
+    "status": []
+}

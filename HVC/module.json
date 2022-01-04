@@ -1,0 +1,12 @@
+{
+    "id": "{B8B0073B-6BED-C9C1-0719-11F04FBE508F}",
+    "name": "HVC Ophaaldatums",
+    "type": 3,
+    "vendor": "",
+    "aliases": [],
+    "parentRequirements": [],
+    "childRequirements": [],
+    "implemented": [],
+    "prefix": "hvc",
+    "url": ""
+}

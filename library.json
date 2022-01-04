@@ -1,0 +1,12 @@
+{
+    "id": "{FD5F50CE-4490-9233-BFFE-2F7C0C05622C}",
+    "name": "BasisLib",
+    "author": "Jasper van Oeffel",
+    "url": "",
+    "compatibility": {
+        "version": "6.0"
+    },
+    "version": "0.1",
+    "build": 0,
+    "date": 2022
+}

@@ -1,0 +1,12 @@
+{
+    "id": "{29B3D18F-8556-6E5D-7458-0414403C23BB}",
+    "name": "Dimmer",
+    "type": 3,
+    "vendor": "",
+    "aliases": [],
+    "parentRequirements": [],
+    "childRequirements": [],
+    "implemented": [],
+    "prefix": "Dim",
+    "url": ""
+}
