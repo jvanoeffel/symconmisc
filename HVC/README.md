@@ -1,5 +1,5 @@
 # HVC OPhaaldatums
-Beschreibung des Moduls.
+Shows the dates when the bins are emptied and gives a push notification the day before.
 
 ### Table of contents
 

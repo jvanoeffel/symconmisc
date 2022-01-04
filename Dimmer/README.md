@@ -1,32 +1,32 @@
 # Dimmer
-Beschreibung des Moduls.
+Dimmer module for controlling the lights. Short press will turn the lights on/off longh press dims the lights.
 
-### Inhaltsverzeichnis
+### Table of contents
 
-1. [Funktionsumfang](#1-funktionsumfang)
-2. [Voraussetzungen](#2-voraussetzungen)
+1. [Functionality](#1-Functionality)
+2. [Requirements](#2-Requirements)
 3. [Software-Installation](#3-software-installation)
-4. [Einrichten der Instanzen in IP-Symcon](#4-einrichten-der-instanzen-in-ip-symcon)
-5. [Statusvariablen und Profile](#5-statusvariablen-und-profile)
+4. [Setting up the instances in IP-Symcon](#4-Setting-up-the-instances-in-IP-Symcon)
+5. [Status variables and profiles](#5-Status-variables-and-profiles)
 6. [WebFront](#6-webfront)
-7. [PHP-Befehlsreferenz](#7-php-befehlsreferenz)
+7. [PHP-Command reference](#7-php-Command-reference)
 
-### 1. Funktionsumfang
+### 1. Functionality
 
 *
 
-### 2. Vorraussetzungen
+### 2. Requirements
 
 - IP-Symcon ab Version 6.0
 
 ### 3. Software-Installation
 
-* Über den Module Store das 'Dimmer'-Modul installieren.
+* Über den Module Store das 'HVC OPhaaldatums'-Modul installieren.
 * Alternativ über das Module Control folgende URL hinzufügen
 
-### 4. Einrichten der Instanzen in IP-Symcon
+### 4. Setting up the instances in IP-Symcon
 
- Unter 'Instanz hinzufügen' kann das 'Dimmer'-Modul mithilfe des Schnellfilters gefunden werden.  
+ Unter 'Instanz hinzufügen' kann das 'HVC OPhaaldatums'-Modul mithilfe des Schnellfilters gefunden werden.  
 	- Weitere Informationen zum Hinzufügen von Instanzen in der [Dokumentation der Instanzen](https://www.symcon.de/service/dokumentation/konzepte/instanzen/#Instanz_hinzufügen)
 
 __Konfigurationsseite__:
@@ -36,7 +36,7 @@ Name     | Beschreibung
          |
          |
 
-### 5. Statusvariablen und Profile
+### 5. Status variables and profiles
 
 Die Statusvariablen/Kategorien werden automatisch angelegt. Das Löschen einzelner kann zu Fehlfunktionen führen.
 
@@ -58,7 +58,7 @@ Name   | Typ
 
 Die Funktionalität, die das Modul im WebFront bietet.
 
-### 7. PHP-Befehlsreferenz
+### 7. PHP-Command reference
 
 `boolean DPB_BeispielFunktion(integer $InstanzID);`
 Erklärung der Funktion.
