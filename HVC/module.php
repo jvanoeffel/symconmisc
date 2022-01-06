@@ -34,7 +34,7 @@
 			$json = file_get_contents("https://inzamelkalender.hvcgroep.nl/adressen/".$this->ReadPropertyString("Postcode").":".$this->ReadPropertyString("huisnr"));
 			$adressen = json_decode($json);
 			
-			$this->UpdateFormField('bagid', 'value ', $adressen[0]->bagid);
+			$this->UpdateFormField("bagid", "value", $adressen[0]->bagid);
 			$this->UpdateFormField("bagDescription", "value", $adressen[0]->description);
 		}
 
