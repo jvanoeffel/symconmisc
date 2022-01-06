@@ -73,7 +73,7 @@
 				$diffDays = (integer) $diff->format("%R%a");
 
 
-				if($diffDays == 1){
+				if($diffDays == 1 && IPS_ObjectExists($this->ReadPropertyInteger("WebFrontId"))){
 					//Morgen word er wat opgehaald
 					WFC_PushNotification ( $this->ReadPropertyInteger('WebFrontId') ,  'HVC Afval' ,  "Let op! Morgen word ".$afvalstromen[$datum->afvalstroom_id]." opgehaald." ,  'happy', 0) ;
 					// echo ("Let op! Morgen word ".$afvalstromen[$datum->afvalstroom_id]." opgehaald. Melding verstuurd naar: ".$this->ReadPropertyInteger('WebFrontId')." \n");

@@ -43,7 +43,7 @@
 				$eid = IPS_CreateEvent(0);        //triggered event
 				IPS_SetEventTrigger($eid, 4, $TriggerInputObject); //On change of variable with ID 15 754
 				IPS_SetEventTriggerValue ($eid, true);
-				IPS_SetEventAction($eid, "{28E92DFA-1640-2F3B-74F6-4B2AAE21CE22}", ["FUNCTION" => 'Dim_ButtonPress', "VARIABLE" => 0, "SAVE_RETURN_VALUE" => FALSE]);
+				IPS_SetEventAction($eid, "{28E92DFA-1640-2F3B-74F6-4B2AAE21CE22}", ["FUNCTION" => 'Dim_buttonPress', "VARIABLE" => 0, "SAVE_RETURN_VALUE" => FALSE]);
 				IPS_SetParent($eid, $this->InstanceID); //Assigning the event
 				IPS_SetEventActive($eid, true);    //Activate the event
 			}
