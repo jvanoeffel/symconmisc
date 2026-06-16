@@ -1,5 +1,5 @@
 {
-    "elements": [	
+	"elements": [
 		{
 			"type": "List",
 			"name": "lampData",
@@ -7,7 +7,6 @@
 			"rowCount": 5,
 			"add": true,
 			"delete": true,
-
 			"sort": {
 				"column": "LampId",
 				"direction": "ascending"
@@ -15,24 +14,23 @@
 			"columns": [
 				{
 					"label": "Lamp",
-					"name": "LampId", 
+					"name": "LampId",
 					"width": "auto",
 					"add": 0,
 					"edit": {
 						"type": "SelectObject"
 					}
-				}, 
-
-                
-                {
+				},
+				{
 					"label": "State",
 					"name": "state",
-					"width": "60px",					
+					"width": "60px",
 					"add": "New!"
-				}, {
+				},
+				{
 					"label": "Minimale dimwaarde",
 					"name": "MinDimValue",
-					"width": "175px",					
+					"width": "175px",
 					"add": 8,
 					"edit": {
 						"type": "NumberSpinner",
@@ -40,47 +38,83 @@
 					}
 				}
 			],
-			"values": [
+			"values": []
+		},
+		{
+			"type": "SelectVariable",
+			"name": "TriggerInputObject",
+			"caption": "Trigger on Object",
+			"onChange": "Dim_UpdateTriggerInput($id, $TriggerInputObject);"
+		},
+		{
+			"type": "Select",
+			"name": "turnOnMode",
+			"caption": "Waarde bij inschakelen",
+			"options": [
+				{
+					"caption": "Laatste waarde",
+					"value": 0
+				},
+				{
+					"caption": "Altijd standaardwaarde",
+					"value": 1
+				},
+				{
+					"caption": "Laatste waarde, behalve binnen tijdvenster",
+					"value": 2
+				}
 			]
+		},
+		{
+			"type": "NumberSpinner",
+			"name": "turnOnDefaultDimValue",
+			"caption": "Standaard inschakelwaarde",
+			"suffix": "%",
+			"minimum": 1,
+			"maximum": 100,
+			"digits": 0
+		},
+		{
+			"type": "ValidationTextBox",
+			"name": "turnOnDefaultFrom",
+			"caption": "Standaardwaarde vanaf"
+		},
+		{
+			"type": "ValidationTextBox",
+			"name": "turnOnDefaultTo",
+			"caption": "Standaardwaarde tot"
+		},
+		{
+			"type": "NumberSpinner",
+			"digits": 1,
+			"name": "maxShortPressTime",
+			"caption": "Max duration in seconds of short press",
+			"suffix": "seconds"
+		},
+		{
+			"type": "NumberSpinner",
+			"name": "pollingInterval",
+			"caption": "Polling interval in milliseconds",
+			"suffix": "milliseconds"
+		},
+		{
+			"type": "NumberSpinner",
+			"name": "maxPollingDuration",
+			"caption": "Max polling duration in seconds",
+			"suffix": "seconds"
 		}
-        ,{
-            "type": "SelectVariable",
-            "name": "TriggerInputObject",
-            "caption": "Trigger on Object",
-            "onChange": "Dim_UpdateTriggerInput($id, $TriggerInputObject);"
-        }
-        ,{  
-            "type":  "NumberSpinner"
-            ,"digits": 1
-            ,"name":  "maxShortPressTime"
-            ,"caption":  "Max duration in seconds of short press"
-            ,"suffix" :  "seconds" 
-        }
-        ,{  
-            "type":  "NumberSpinner"
-            ,"name":  "pollingInterval"
-            ,"caption":  "Polling interval in milliseconds"
-            ,"suffix" :  "milliseconds" 
-        }
-        ,{  
-            "type":  "NumberSpinner"
-            ,"name":  "maxPollingDuration"
-            ,"caption":  "Max polling duration in seconds"
-            ,"suffix" :  "seconds" 
-        }
-
-    ],
-    "actions": [
-            { 
-                "type": "Button"
-                ,"label": "Alles uit"
-                ,"onClick": "echo dim_TurnLightsOff($id);" 
-            },
-            { 
-                "type": "Button"
-                ,"label": "Alles aan"
-                ,"onClick": "echo dim_TurnLightsOn($id);" 
-            }
-        ],
-    "status": []
+	],
+	"actions": [
+		{
+			"type": "Button",
+			"label": "Alles uit",
+			"onClick": "echo dim_TurnLightsOff($id);"
+		},
+		{
+			"type": "Button",
+			"label": "Alles aan",
+			"onClick": "echo dim_TurnLightsOn($id);"
+		}
+	],
+	"status": []
 }

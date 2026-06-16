@@ -13,6 +13,11 @@
 			$this->RegisterPropertyInteger("maxPollingDuration", 30);
 			$this->RegisterPropertyInteger("TriggerInputObject", 0);
 			$this->RegisterVariableBoolean("DMX_DimUp", "DimUp");
+
+			$this->RegisterPropertyInteger("turnOnMode", 0);
+			$this->RegisterPropertyInteger("turnOnDefaultDimValue", 20);
+			$this->RegisterPropertyString("turnOnDefaultFrom", "21:00");
+			$this->RegisterPropertyString("turnOnDefaultTo", "07:00");
 		}
 		
 		public function ApplyChanges(){
@@ -101,6 +106,23 @@
 							"rowColor" => "#ff0000"
 						);
 					}								
+				}
+			}
+			$turnOnMode = $this->ReadPropertyInteger("turnOnMode");
+
+			foreach($data->elements as $element){
+				if(isset($element->name)){
+					if($element->name == "turnOnDefaultDimValue"){
+						$element->visible = ($turnOnMode == 1 || $turnOnMode == 2);
+					}
+
+					if($element->name == "turnOnDefaultFrom"){
+						$element->visible = ($turnOnMode == 2);
+					}
+
+					if($element->name == "turnOnDefaultTo"){
+						$element->visible = ($turnOnMode == 2);
+					}
 				}
 			}
 			
@@ -250,27 +272,70 @@
 		public function TurnLightsOn(){
 			$lampData = json_decode($this->ReadPropertyString("lampData"));
 
+			$useDefaultValue = $this->ShouldUseDefaultTurnOnValue();
+			$defaultDimValue = round(255 / 100 * $this->ReadPropertyInteger("turnOnDefaultDimValue"), 0);
+
 			foreach($lampData as $lamp){
 				$lampObject = IPS_GetObject($lamp->LampId);
+				$minDimValue = round(255 / 100 * $lamp->MinDimValue, 0);
 
-				//value as integer, dus max is 255
-				$lastDimValue = 0;
-				//zoek in het child object van de lamp naar een lastValue van de dimwaarde
-				foreach($lampObject['ChildrenIDs'] as $lampChild){
-					$childObject = IPS_GetObject($lampChild);
-					if($childObject['ObjectName'] == "LastValue"){
-						$lastDimValue = getValueInteger($childObject['ObjectID']);
-						break;
-					}
-				}
-				if($lastDimValue > round(255/100*$lamp->MinDimValue,0)){
-					//lastDimValue gevonden en deze is groter dan de min dim waarde
-					DMX_FadeChannel($lampObject['ParentID'],(str_replace('ChannelValue', '',$lampObject['ObjectIdent'])),$lastDimValue,1);
+				if($useDefaultValue){
+					$targetValue = $defaultDimValue;
 				}
 				else{
-					//geen lastDimValue gevonden of deze is niet groot genoeg, gebruik min dim waarde 
-					DMX_FadeChannel($lampObject['ParentID'],(str_replace('ChannelValue', '',$lampObject['ObjectIdent'])),round(255/100*$lamp->MinDimValue,0),1);
+					$targetValue = $this->GetLastDimValue($lamp->LampId);
+				}
+
+				if($targetValue < $minDimValue){
+					$targetValue = $minDimValue;
+				}
+
+				DMX_FadeChannel(
+					$lampObject['ParentID'],
+					str_replace('ChannelValue', '', $lampObject['ObjectIdent']),
+					$targetValue,
+					1
+				);
+			}
+		}
+
+		private function ShouldUseDefaultTurnOnValue(): bool{
+		$mode = $this->ReadPropertyInteger("turnOnMode");
+
+		if($mode == 1){
+			return true;
+		}
+
+		if($mode != 2){
+			return false;
+		}
+
+		$from = strtotime(date("Y-m-d ") . $this->ReadPropertyString("turnOnDefaultFrom"));
+		$to = strtotime(date("Y-m-d ") . $this->ReadPropertyString("turnOnDefaultTo"));
+		$now = time();
+
+		if($from === false || $to === false){
+			return false;
+		}
+
+		if($to <= $from){
+			return ($now >= $from || $now <= $to);
+		}
+
+			return ($now >= $from && $now <= $to);
+		}
+
+		private function GetLastDimValue(int $lampId): int{
+			$lampObject = IPS_GetObject($lampId);
+
+			foreach($lampObject['ChildrenIDs'] as $lampChild){
+				$childObject = IPS_GetObject($lampChild);
+
+				if($childObject['ObjectName'] == "LastValue"){
+				return GetValueInteger($childObject['ObjectID']);
 				}
 			}
+
+			return 0;
 		}
 	}
